@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* ==========================================
+   Design System
+========================================== */
+
+:root {
+  /* Brand */
+  --color-primary: #0b2e59;
+  --color-primary-hover: #16427d;
+  --color-accent: #18c6d9;
+
+  /* Surfaces */
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+
+  /* Text */
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+
+  /* Border */
+  --color-border: #e5e7eb;
+
+  /* Radius */
+  --radius-button: 16px;
+  --radius-card: 24px;
+  --radius-image: 32px;
+
+  /* Shadows */
+  --shadow-card:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+
+  --shadow-hover:
+    0 18px 50px rgba(15, 23, 42, 0.12);
+
+  /* Layout */
+  --header-height: 84px;
+  --container-width: 1200px;
+}
+
+/* ==========================================
+   Base
+========================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-manrope), sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================
+   Selection
+========================================== */
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* ==========================================
+   Focus
+========================================== */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   Images
+========================================== */
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+button {
+  cursor: pointer;
+}
