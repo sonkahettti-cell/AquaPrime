@@ -51,17 +51,23 @@ export default function CTA() {
     };
 
     try {
-      const response = await fetch("/api/telegram", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+  "https://aquaprime-telegram.sonkahettti.workers.dev/",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }
+);
 
-      if (!response.ok) {
-        throw new Error();
-      }
+const result = await response.json();
+
+if (!response.ok) {
+  console.error(result);
+  throw new Error(result.error || "Worker error");
+}
 
       setStatus(
         "Спасибо! Мы получили заявку и свяжемся с вами в ближайшее время."
