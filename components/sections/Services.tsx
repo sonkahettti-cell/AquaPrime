@@ -18,34 +18,36 @@ import IconBox from "@/components/ui/IconBox";
 import { services } from "@/data/services";
 
 const icons = {
-  FlaskConical,
   Droplets,
+  FlaskConical,
   Filter,
+  Settings,
   ShieldCheck,
   Waves,
-  Settings,
+};
+
+const serviceLinks: Record<string, string> = {
+  "Умягчение воды": "/umyagchenie-vody/",
+  "Обезжелезивание воды": "/obezhelezivanie-vody/",
 };
 
 export default function Services() {
   return (
     <Section id="services" background="gray">
       <Container>
-        <SectionTitle
-          badge="Услуги"
-          title="Водоочистка для дома и дачи"
-          description="Подбираем, устанавливаем и обслуживаем системы очистки воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области."
-        />
+        <FadeIn>
+          <SectionTitle
+            badge="Наши услуги"
+            title="Водоочистка для дома и коттеджа"
+            description="Подбираем системы очистки воды с учётом анализа воды, водопотребления и особенностей объекта в Нижнем Новгороде и Нижегородской области."
+          />
+        </FadeIn>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = icons[service.icon as keyof typeof icons];
-
-            const href =
-              service.title === "Умягчение воды"
-                ? "/umyagchenie-vody/"
-                : service.title === "Обезжелезивание воды"
-                  ? "/obezhelezivanie-vody/"
-                  : "#contacts";
+            const href = serviceLinks[service.title] ?? "#contacts";
+            const isSeoPage = Boolean(serviceLinks[service.title]);
 
             return (
               <FadeIn key={service.title} delay={index * 0.05}>
@@ -64,10 +66,15 @@ export default function Services() {
 
                   <a
                     href={href}
-                    aria-label={`Подробнее: ${service.title}`}
+                    aria-label={
+                      isSeoPage
+                        ? `Подробнее: ${service.title}`
+                        : `Получить консультацию по услуге: ${service.title}`
+                    }
                     className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sky-600 transition-colors group-hover:text-sky-700"
                   >
-                    Подробнее
+                    {isSeoPage ? "Подробнее" : "Подобрать решение"}
+
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </Card>
@@ -77,16 +84,18 @@ export default function Services() {
         </div>
 
         <FadeIn delay={0.2}>
-          <div className="mt-12 text-center">
-            <p className="text-base text-slate-600">
-              Не знаете, какая система подойдёт именно для вашей воды?
+          <div className="mx-auto mt-12 max-w-3xl text-center">
+            <p className="text-base leading-7 text-slate-600">
+              Если вы не знаете, какая система подойдёт именно для вашей воды,
+              начните с анализа воды. После этого можно подобрать подходящее
+              решение для дома.
             </p>
 
             <a
               href="#contacts"
               className="mt-4 inline-flex items-center gap-2 font-semibold text-sky-600 transition-colors hover:text-sky-700"
             >
-              Поможем подобрать подходящее решение
+              Получить консультацию
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>

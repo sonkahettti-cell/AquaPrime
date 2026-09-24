@@ -1,303 +1,354 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Droplets,
-  ShieldCheck,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
-import Card from "@/components/ui/Card";
+import SectionTitle from "@/components/ui/SectionTitle";
 import FadeIn from "@/components/ui/FadeIn";
 import CTA from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
-  title: "Умягчение воды в Нижнем Новгороде — AquaPrime",
-
+  title: "Умягчение воды в Нижнем Новгороде",
   description:
-    "Умягчение воды для частных домов и дач в Нижнем Новгороде и Нижегородской области. Подбор, монтаж и обслуживание систем умягчения воды.",
-
+    "Умягчение воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области. Подбор, монтаж и обслуживание систем умягчения воды.",
   alternates: {
     canonical: "/umyagchenie-vody/",
   },
-
   openGraph: {
-    title: "Умягчение воды в Нижнем Новгороде — AquaPrime",
+    title: "Умягчение воды в Нижнем Новгороде | AquaPrime",
     description:
-      "Подбор и монтаж систем умягчения воды для домов и коттеджей в Нижнем Новгороде и Нижегородской области.",
+      "Подбор и установка систем умягчения воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области.",
     url: "https://aqprime.ru/umyagchenie-vody/",
     type: "website",
+    locale: "ru_RU",
   },
 };
 
-const faq = [
+const faqItems = [
   {
     question: "Зачем нужно умягчение воды?",
     answer:
-      "Умягчение помогает снизить содержание солей жёсткости в воде. Это уменьшает образование накипи на сантехнике, нагревательных элементах, бойлерах и бытовой технике.",
+      "Жёсткая вода содержит повышенное количество солей кальция и магния. При нагревании они могут образовывать накипь на нагревательных элементах, сантехнике и бытовой технике. Система умягчения снижает жёсткость воды и помогает уменьшить образование отложений.",
   },
   {
-    question: "Как понять, что вода слишком жёсткая?",
+    question: "Как понять, что вода жёсткая?",
     answer:
-      "На жёсткость воды могут указывать быстрое появление накипи, белый налёт на сантехнике, повышенный расход моющих средств и ухудшение работы нагревательной техники. Точно определить состав воды помогает анализ.",
+      "О возможной высокой жёсткости могут говорить белый налёт на сантехнике, накипь в чайнике и бойлере, снижение эффективности моющих средств и сухость кожи после контакта с водой. Точно определить жёсткость можно только после анализа воды.",
   },
   {
-    question: "Нужно ли делать анализ воды перед подбором системы?",
+    question: "Нужен ли анализ воды перед установкой умягчителя?",
     answer:
-      "Да. Состав воды влияет на выбор оборудования и фильтрующих материалов. Поэтому перед подбором системы желательно учитывать результаты анализа воды.",
+      "Да. Анализ позволяет определить жёсткость и другие показатели воды, которые могут влиять на выбор оборудования и фильтрующей загрузки. Это помогает подобрать систему под конкретный источник воды.",
   },
   {
-    question: "Подойдёт ли система умягчения для частного дома?",
+    question: "Подходит ли умягчитель для частного дома?",
     answer:
-      "Система может использоваться в частном доме, если её производительность и характеристики соответствуют расходу воды и её составу. Оборудование подбирается индивидуально.",
+      "Да. Системы умягчения широко применяются в частных домах и коттеджах. Конкретная конфигурация зависит от анализа воды, количества жильцов, расхода воды и режима водопотребления.",
   },
   {
     question: "Нужно ли обслуживать систему умягчения?",
     answer:
-      "Да. Система требует периодического обслуживания в соответствии с её конструкцией и режимом эксплуатации. AquaPrime также занимается сервисным обслуживанием систем водоочистки.",
+      "Да. Система требует периодического контроля и обслуживания. В зависимости от оборудования может потребоваться пополнение реагента, контроль работы клапана и периодическая замена или обслуживание фильтрующей загрузки.",
   },
 ];
 
-export default function SofteningPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://aqprime.ru/umyagchenie-vody/#service",
-    name: "Умягчение воды",
-    serviceType: "Умягчение воды",
-    description:
-      "Подбор, монтаж и обслуживание систем умягчения воды для частных домов и коттеджей.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://aqprime.ru/#business",
-      name: "AquaPrime",
-      url: "https://aqprime.ru/",
-    },
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: "Нижегородская область",
-    },
-    url: "https://aqprime.ru/umyagchenie-vody/",
-  };
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://aqprime.ru/umyagchenie-vody/#service",
+  name: "Умягчение воды",
+  description:
+    "Подбор, установка и обслуживание систем умягчения воды для частных домов и коттеджей.",
+  provider: {
+    "@type": "LocalBusiness",
+    "@id": "https://aqprime.ru/#business",
+    name: "AquaPrime",
+    url: "https://aqprime.ru/",
+  },
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: "Нижегородская область",
+  },
+  serviceType: "Умягчение воды",
+  url: "https://aqprime.ru/umyagchenie-vody/",
+};
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+export default function WaterSofteningPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
+          __html: JSON.stringify(serviceJsonLd),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd),
         }}
       />
 
       <main>
-        <section className="bg-[#081F3F] py-24 lg:py-32">
+        {/* Intro */}
+
+        <Section background="white">
           <Container>
             <FadeIn>
-              <div className="max-w-4xl">
+              <div className="mx-auto max-w-4xl text-center">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 transition hover:text-white"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition hover:text-cyan-700"
                 >
-                  ← AquaPrime
+                  AquaPrime
+                  <ArrowRight className="h-4 w-4" />
+                  Умягчение воды
                 </Link>
 
-                <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-cyan-500/20 px-4 py-2 text-sm font-semibold text-cyan-300">
-                  <Droplets size={16} />
-                  Водоочистка
-                </div>
-
-                <h1 className="mt-7 text-5xl font-black leading-tight tracking-tight text-white md:text-7xl">
-                  Умягчение воды
-                  <br />
-                  в Нижнем Новгороде
-                  <br />
-                  и области
+                <h1 className="mt-8 text-4xl font-black leading-tight tracking-tight text-[#0B2E59] md:text-6xl">
+                  Умягчение воды в Нижнем Новгороде и области
                 </h1>
 
-                <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-300 md:text-xl">
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">
                   Подбираем и устанавливаем системы умягчения воды для
-                  частных домов и коттеджей. Помогаем снизить жёсткость
-                  воды и защитить сантехнику, бойлеры и бытовую технику
-                  от образования накипи.
+                  частных домов и коттеджей в Нижнем Новгороде и
+                  Нижегородской области. Конфигурация системы определяется
+                  после анализа воды и оценки водопотребления.
                 </p>
-
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                  <Link
-                    href="/#contacts"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-500 px-7 py-4 font-bold text-white transition hover:bg-cyan-400"
-                  >
-                    Получить консультацию
-                    <ArrowRight size={18} />
-                  </Link>
-
-                  <Link
-                    href="/"
-                    className="inline-flex items-center justify-center rounded-2xl border border-white/20 px-7 py-4 font-bold text-white transition hover:bg-white/10"
-                  >
-                    Вернуться на главную
-                  </Link>
-                </div>
               </div>
             </FadeIn>
           </Container>
-        </section>
+        </Section>
+
+        {/* Problem */}
 
         <Section background="gray">
           <Container>
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <SectionTitle
+              badge="Жёсткая вода"
+              title="Почему вода требует умягчения"
+              description="Повышенная жёсткость воды может приводить к образованию накипи и отложений при нагревании."
+              center
+            />
+
+            <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
               <FadeIn>
-                <div>
-                  <span className="text-sm font-bold uppercase tracking-widest text-cyan-600">
-                    Жёсткая вода
-                  </span>
-
-                  <h2 className="mt-4 text-4xl font-black text-[#0B2E59]">
-                    Почему воде может понадобиться умягчение?
-                  </h2>
-
-                  <p className="mt-6 text-lg leading-8 text-slate-600">
-                    Жёсткая вода содержит повышенное количество солей
-                    кальция и магния. При нагревании они могут становиться
-                    причиной образования накипи на нагревательных элементах
-                    и бытовой технике.
-                  </p>
-
-                  <p className="mt-5 text-lg leading-8 text-slate-600">
-                    Для частного дома это особенно актуально, если вода
-                    поступает из скважины или другого автономного источника.
-                    Перед подбором оборудования важно учитывать реальный
-                    состав воды и расход в доме.
-                  </p>
-                </div>
-              </FadeIn>
-
-              <FadeIn delay={0.1}>
-                <Card className="p-8 lg:p-10">
-                  <h3 className="text-2xl font-bold text-[#0B2E59]">
-                    Признаки жёсткой воды
+                <div className="h-full rounded-3xl border border-slate-200 bg-white p-7">
+                  <h3 className="text-xl font-bold text-[#0B2E59]">
+                    Накипь
                   </h3>
 
-                  <ul className="mt-7 space-y-5">
-                    {[
-                      "Белый налёт на сантехнике",
-                      "Накипь на нагревательных элементах",
-                      "Быстрое загрязнение смесителей",
-                      "Повышенный расход моющих средств",
-                      "Накипь в бойлере и бытовой технике",
-                    ].map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 text-slate-600"
-                      >
-                        <CheckCircle2
-                          size={21}
-                          className="mt-0.5 shrink-0 text-cyan-500"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Отложения могут появляться в чайниках, бойлерах,
+                    водонагревателях и других устройствах, где вода
+                    нагревается.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.08}>
+                <div className="h-full rounded-3xl border border-slate-200 bg-white p-7">
+                  <h3 className="text-xl font-bold text-[#0B2E59]">
+                    Сантехника
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    На поверхности сантехники может оставаться белый
+                    известковый налёт, который приходится регулярно
+                    удалять.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.16}>
+                <div className="h-full rounded-3xl border border-slate-200 bg-white p-7">
+                  <h3 className="text-xl font-bold text-[#0B2E59]">
+                    Бытовая техника
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Жёсткость воды учитывают при эксплуатации бойлеров,
+                    стиральных и посудомоечных машин и другой техники.
+                  </p>
+                </div>
               </FadeIn>
             </div>
           </Container>
         </Section>
 
-        <Section>
+        {/* Selection */}
+
+        <Section background="white">
           <Container>
-            <FadeIn>
-              <div className="mx-auto max-w-3xl text-center">
-                <span className="text-sm font-bold uppercase tracking-widest text-cyan-600">
-                  Решение AquaPrime
-                </span>
+            <SectionTitle
+              badge="Подбор системы"
+              title="Как подбирается умягчение воды"
+              description="Оборудование подбирается не только по количеству воды, но и по результатам анализа."
+              center
+            />
 
-                <h2 className="mt-4 text-4xl font-black text-[#0B2E59]">
-                  Как подбирается система умягчения воды
-                </h2>
+            <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
+              <FadeIn>
+                <div className="rounded-3xl border border-slate-200 p-7">
+                  <div className="text-sm font-bold text-cyan-600">
+                    01
+                  </div>
 
-                <p className="mt-6 text-lg leading-8 text-slate-600">
-                  Универсальной системы для каждого дома нет. Оборудование
-                  подбирается с учётом состава воды, расхода и особенностей
-                  объекта.
-                </p>
-              </div>
-            </FadeIn>
+                  <h3 className="mt-4 text-xl font-bold text-[#0B2E59]">
+                    Анализ воды
+                  </h3>
 
-            <div className="mt-16 grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  icon: Droplets,
-                  title: "Анализ воды",
-                  text: "Изучаем показатели воды и определяем, какие проблемы необходимо решить.",
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "Подбор системы",
-                  text: "Выбираем оборудование с учётом состава воды и предполагаемого расхода.",
-                },
-                {
-                  icon: Wrench,
-                  title: "Монтаж и сервис",
-                  text: "Устанавливаем систему и при необходимости выполняем её дальнейшее обслуживание.",
-                },
-              ].map((item, index) => {
-                const Icon = item.icon;
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Определяем жёсткость и другие показатели воды,
+                    которые важны для выбора оборудования.
+                  </p>
+                </div>
+              </FadeIn>
 
-                return (
-                  <FadeIn key={item.title} delay={index * 0.08}>
-                    <Card className="h-full p-8">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-50">
-                        <Icon
-                          size={27}
-                          className="text-cyan-600"
-                        />
-                      </div>
+              <FadeIn delay={0.08}>
+                <div className="rounded-3xl border border-slate-200 p-7">
+                  <div className="text-sm font-bold text-cyan-600">
+                    02
+                  </div>
 
-                      <h3 className="mt-7 text-2xl font-bold text-[#0B2E59]">
-                        {item.title}
-                      </h3>
+                  <h3 className="mt-4 text-xl font-bold text-[#0B2E59]">
+                    Расчёт
+                  </h3>
 
-                      <p className="mt-4 leading-7 text-slate-600">
-                        {item.text}
-                      </p>
-                    </Card>
-                  </FadeIn>
-                );
-              })}
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Учитываем расход воды, количество пользователей
+                    и особенности системы водоснабжения дома.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.16}>
+                <div className="rounded-3xl border border-slate-200 p-7">
+                  <div className="text-sm font-bold text-cyan-600">
+                    03
+                  </div>
+
+                  <h3 className="mt-4 text-xl font-bold text-[#0B2E59]">
+                    Установка
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    После подбора оборудования выполняем монтаж,
+                    настройку и проверку работы системы.
+                  </p>
+                </div>
+              </FadeIn>
             </div>
           </Container>
         </Section>
 
+        {/* Private house */}
+
         <Section background="gray">
+          <Container>
+            <div className="mx-auto max-w-4xl">
+              <FadeIn>
+                <SectionTitle
+                  badge="Для частного дома"
+                  title="Умягчение воды для дома и коттеджа"
+                  description="Система может быть встроена в общую схему водоочистки и работать как один из этапов подготовки воды."
+                  center
+                />
+
+                <div className="mt-10 rounded-3xl bg-white p-8 shadow-sm md:p-10">
+                  <p className="text-lg leading-8 text-slate-600">
+                    Если кроме высокой жёсткости в воде присутствуют
+                    железо, марганец, неприятный запах или другие
+                    загрязнения, одного умягчителя может быть недостаточно.
+                    В таком случае система проектируется комплексно.
+                  </p>
+
+                  <div className="mt-7">
+                    <Link
+                      href="/obezhelezivanie-vody/"
+                      className="inline-flex items-center gap-2 font-semibold text-cyan-600 transition hover:text-cyan-700"
+                    >
+                      Обезжелезивание воды
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </Container>
+        </Section>
+
+        {/* Internal linking */}
+
+        <Section background="white">
           <Container>
             <FadeIn>
               <div className="mx-auto max-w-3xl text-center">
                 <span className="text-sm font-bold uppercase tracking-widest text-cyan-600">
-                  Частые вопросы
+                  Другие решения
                 </span>
 
-                <h2 className="mt-4 text-4xl font-black text-[#0B2E59]">
-                  Вопросы об умягчении воды
+                <h2 className="mt-4 text-3xl font-black text-[#0B2E59] md:text-4xl">
+                  Другие системы водоочистки AquaPrime
                 </h2>
+
+                <p className="mt-5 text-lg leading-8 text-slate-600">
+                  Если проблема с водой связана не только с жёсткостью,
+                  возможно, потребуется комплексная система очистки.
+                </p>
+
+                <Link
+                  href="/obezhelezivanie-vody/"
+                  className="mt-7 inline-flex items-center gap-2 font-semibold text-cyan-600 transition hover:text-cyan-700"
+                >
+                  Обезжелезивание воды
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </FadeIn>
+          </Container>
+        </Section>
 
-            <div className="mx-auto mt-12 max-w-4xl space-y-5">
-              {faq.map((item, index) => (
-                <FadeIn key={item.question} delay={index * 0.04}>
-                  <details className="group rounded-2xl bg-white p-6 shadow-sm">
-                    <summary className="cursor-pointer list-none pr-8 text-lg font-bold text-[#0B2E59]">
-                      {item.question}
-                    </summary>
+        {/* FAQ */}
 
-                    <p className="mt-4 leading-7 text-slate-600">
-                      {item.answer}
-                    </p>
-                  </details>
-                </FadeIn>
+        <Section background="gray">
+          <Container>
+            <SectionTitle
+              badge="FAQ"
+              title="Частые вопросы об умягчении воды"
+              description="Основная информация о выборе и эксплуатации систем умягчения."
+              center
+            />
+
+            <div className="mx-auto mt-10 max-w-4xl space-y-4">
+              {faqItems.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-2xl border border-slate-200 bg-white p-6"
+                >
+                  <summary className="cursor-pointer list-none pr-8 text-lg font-semibold text-[#0B2E59]">
+                    {item.question}
+                  </summary>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    {item.answer}
+                  </p>
+                </details>
               ))}
             </div>
           </Container>

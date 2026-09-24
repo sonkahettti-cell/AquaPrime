@@ -1,52 +1,55 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import CTA from "@/components/sections/CTA";
-import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
+import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
+import FadeIn from "@/components/ui/FadeIn";
+import CTA from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Обезжелезивание воды в Нижнем Новгороде",
   description:
-    "Обезжелезивание воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области. Подбор системы по анализу воды, монтаж и сервис AquaPrime.",
+    "Обезжелезивание воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области. Подбор, монтаж и обслуживание систем очистки воды от железа.",
   alternates: {
-    canonical: "https://aqprime.ru/obezhelezivanie-vody/",
+    canonical: "/obezhelezivanie-vody/",
   },
   openGraph: {
     title: "Обезжелезивание воды в Нижнем Новгороде | AquaPrime",
     description:
-      "Системы обезжелезивания воды для дома и коттеджа в Нижнем Новгороде и Нижегородской области. Подбор оборудования, монтаж и обслуживание.",
+      "Подбор и установка систем обезжелезивания воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области.",
     url: "https://aqprime.ru/obezhelezivanie-vody/",
-    locale: "ru_RU",
     type: "website",
+    locale: "ru_RU",
   },
 };
 
 const faqItems = [
   {
-    question: "Зачем нужно обезжелезивание воды?",
+    question: "Почему в воде появляется железо?",
     answer:
-      "Повышенное содержание железа может влиять на вкус и запах воды, оставлять желтоватый или ржавый налёт на сантехнике и постепенно загрязнять оборудование. Система обезжелезивания помогает снизить содержание железа до подходящего уровня.",
+      "Железо может присутствовать в подземной воде в растворённом виде или вместе с другими соединениями. После контакта с воздухом оно может окисляться и образовывать характерный осадок.",
   },
   {
-    question: "Как понять, что в воде повышенное содержание железа?",
+    question: "Как понять, что в воде много железа?",
     answer:
-      "На повышенное содержание железа могут указывать металлический привкус, характерный запах, желтоватый оттенок воды после отстаивания и ржавые пятна на сантехнике. Однако точно определить содержание железа можно только с помощью анализа воды.",
+      "На повышенное содержание железа могут указывать металлический или неприятный запах, изменение цвета воды, рыжий налёт на сантехнике и пятна на раковинах и других поверхностях. Точное содержание определяется лабораторным анализом.",
   },
   {
-    question: "Можно ли очистить от железа воду из скважины?",
+    question: "Нужен ли анализ воды перед установкой обезжелезивателя?",
     answer:
-      "Да. Для частного дома можно подобрать систему обезжелезивания с учётом состава исходной воды, производительности системы и особенностей водопотребления.",
+      "Да. Анализ необходим для определения содержания железа и других показателей, которые влияют на выбор технологии очистки и фильтрующей загрузки.",
+  },
+  {
+    question: "Можно ли установить обезжелезиватель в частном доме?",
+    answer:
+      "Да. Системы обезжелезивания применяются в частных домах и коттеджах. Конкретное оборудование подбирается с учётом состава воды, расхода и особенностей источника.",
   },
   {
     question: "Можно ли одновременно убрать железо и жёсткость?",
     answer:
-      "Да, в зависимости от состава воды можно подобрать комплексную систему водоочистки, которая решает сразу несколько задач — например, снижение содержания железа и умягчение воды.",
-  },
-  {
-    question: "Нужен ли анализ воды перед установкой системы?",
-    answer:
-      "Обязательно. Для правильного подбора оборудования важно знать не только содержание железа, но и другие параметры воды, включая жёсткость, марганец, pH и другие показатели.",
+      "Да. При наличии нескольких проблем с водой система может включать несколько последовательных ступеней очистки. Например, обезжелезивание и умягчение могут быть частью одной комплексной схемы водоподготовки.",
   },
 ];
 
@@ -55,9 +58,8 @@ const serviceJsonLd = {
   "@type": "Service",
   "@id": "https://aqprime.ru/obezhelezivanie-vody/#service",
   name: "Обезжелезивание воды",
-  serviceType: "Обезжелезивание воды",
   description:
-    "Подбор, установка и обслуживание систем обезжелезивания воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области.",
+    "Подбор, установка и обслуживание систем обезжелезивания воды для частных домов и коттеджей.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://aqprime.ru/#business",
@@ -68,6 +70,7 @@ const serviceJsonLd = {
     "@type": "AdministrativeArea",
     name: "Нижегородская область",
   },
+  serviceType: "Обезжелезивание воды",
   url: "https://aqprime.ru/obezhelezivanie-vody/",
 };
 
@@ -87,165 +90,6 @@ const faqJsonLd = {
 export default function IronRemovalPage() {
   return (
     <>
-      <main>
-        <Section>
-          <Container>
-            <SectionTitle
-              badge="Обезжелезивание воды"
-              title="Обезжелезивание воды в Нижнем Новгороде и области"
-              description="Подбираем системы очистки воды от железа для частных домов и коттеджей с учётом состава исходной воды, водопотребления и особенностей объекта."
-            />
-
-            <div className="mx-auto mt-12 max-w-4xl space-y-10 text-base leading-8 text-slate-600">
-              <section>
-                <h2 className="text-2xl font-semibold text-slate-900">
-                  Почему в воде появляется железо
-                </h2>
-
-                <p className="mt-4">
-                  Повышенное содержание железа часто встречается в воде из
-                  скважин и других индивидуальных источников. В воде железо
-                  может присутствовать в разных формах, поэтому для выбора
-                  подходящей системы важно учитывать не только сам факт его
-                  наличия, но и общий состав воды.
-                </p>
-
-                <p className="mt-4">
-                  При повышенном содержании железа вода может приобретать
-                  металлический привкус и запах, менять цвет после контакта с
-                  воздухом, а на сантехнике и бытовом оборудовании могут
-                  появляться характерные желтоватые или ржавые отложения.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold text-slate-900">
-                  Когда требуется обезжелезивание воды
-                </h2>
-
-                <p className="mt-4">
-                  Обратить внимание на качество воды стоит, если после
-                  набора она со временем меняет цвет, появляется металлический
-                  привкус или запах, а на сантехнике остаются пятна и налёт.
-                </p>
-
-                <p className="mt-4">
-                  При этом визуальных признаков недостаточно для точного
-                  подбора оборудования. Один и тот же внешний симптом может
-                  быть связан с разными показателями воды, поэтому перед
-                  установкой системы желательно выполнить анализ.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold text-slate-900">
-                  Как подбирается система обезжелезивания
-                </h2>
-
-                <p className="mt-4">
-                  Система подбирается не только по концентрации железа.
-                  Важны также производительность, расход воды, жёсткость,
-                  марганец, pH и другие характеристики исходной воды.
-                </p>
-
-                <p className="mt-4">
-                  После анализа можно определить подходящую технологию
-                  очистки и подобрать оборудование, которое будет соответствовать
-                  условиям конкретного дома.
-                </p>
-
-                <div className="mt-8 grid gap-4 md:grid-cols-3">
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6">
-                    <div className="text-sm font-semibold text-sky-600">
-                      01
-                    </div>
-
-                    <h3 className="mt-3 text-lg font-semibold text-slate-900">
-                      Анализ воды
-                    </h3>
-
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
-                      Определяем основные показатели исходной воды.
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6">
-                    <div className="text-sm font-semibold text-sky-600">
-                      02
-                    </div>
-
-                    <h3 className="mt-3 text-lg font-semibold text-slate-900">
-                      Подбор системы
-                    </h3>
-
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
-                      Подбираем оборудование под состав воды и расход.
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6">
-                    <div className="text-sm font-semibold text-sky-600">
-                      03
-                    </div>
-
-                    <h3 className="mt-3 text-lg font-semibold text-slate-900">
-                      Монтаж и настройка
-                    </h3>
-
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
-                      Устанавливаем и настраиваем систему водоочистки.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold text-slate-900">
-                  Обезжелезивание воды для частного дома
-                </h2>
-
-                <p className="mt-4">
-                  Для частного дома система должна учитывать реальное
-                  водопотребление и характеристики источника. Слишком маленькая
-                  производительность может привести к недостатку очищенной воды,
-                  а неправильно подобранная технология — к неудовлетворительному
-                  результату очистки.
-                </p>
-
-                <p className="mt-4">
-                  Поэтому мы рекомендуем сначала разобраться с составом воды,
-                  а уже затем выбирать оборудование для обезжелезивания.
-                </p>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold text-slate-900">
-                  Частые вопросы
-                </h2>
-
-                <div className="mt-6 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
-                  {faqItems.map((item) => (
-                    <details key={item.question} className="group p-6">
-                      <summary className="cursor-pointer list-none pr-8 text-lg font-semibold text-slate-900">
-                        <span className="relative block">
-                          {item.question}
-                        </span>
-                      </summary>
-
-                      <p className="mt-4 text-base leading-7 text-slate-600">
-                        {item.answer}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              </section>
-            </div>
-          </Container>
-        </Section>
-
-        <CTA />
-      </main>
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -259,6 +103,258 @@ export default function IronRemovalPage() {
           __html: JSON.stringify(faqJsonLd),
         }}
       />
+
+      <main>
+        {/* Intro */}
+
+        <Section background="white">
+          <Container>
+            <FadeIn>
+              <div className="mx-auto max-w-4xl text-center">
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition hover:text-cyan-700"
+                >
+                  AquaPrime
+                  <ArrowRight className="h-4 w-4" />
+                  Обезжелезивание воды
+                </Link>
+
+                <h1 className="mt-8 text-4xl font-black leading-tight tracking-tight text-[#0B2E59] md:text-6xl">
+                  Обезжелезивание воды в Нижнем Новгороде и области
+                </h1>
+
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+                  Подбираем и устанавливаем системы очистки воды от железа
+                  для частных домов и коттеджей в Нижнем Новгороде и
+                  Нижегородской области. Конфигурация системы определяется
+                  по результатам анализа воды и особенностям источника.
+                </p>
+              </div>
+            </FadeIn>
+          </Container>
+        </Section>
+
+        {/* Problem */}
+
+        <Section background="gray">
+          <Container>
+            <SectionTitle
+              badge="Железо в воде"
+              title="Когда требуется обезжелезивание воды"
+              description="Повышенное содержание железа может влиять на внешний вид воды, сантехнику и бытовые процессы."
+              center
+            />
+
+            <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
+              <FadeIn>
+                <div className="h-full rounded-3xl border border-slate-200 bg-white p-7">
+                  <h3 className="text-xl font-bold text-[#0B2E59]">
+                    Рыжий налёт
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    На сантехнике и других поверхностях могут появляться
+                    характерные рыжие или коричневые следы.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.08}>
+                <div className="h-full rounded-3xl border border-slate-200 bg-white p-7">
+                  <h3 className="text-xl font-bold text-[#0B2E59]">
+                    Запах и вкус
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    При повышенном содержании железа вода может иметь
+                    металлический привкус или неприятный запах.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.16}>
+                <div className="h-full rounded-3xl border border-slate-200 bg-white p-7">
+                  <h3 className="text-xl font-bold text-[#0B2E59]">
+                    Изменение цвета
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    После контакта с воздухом растворённое железо может
+                    окисляться и приводить к изменению цвета воды.
+                  </p>
+                </div>
+              </FadeIn>
+            </div>
+          </Container>
+        </Section>
+
+        {/* Selection */}
+
+        <Section background="white">
+          <Container>
+            <SectionTitle
+              badge="Подбор системы"
+              title="Как подбирается обезжелезивание"
+              description="Технология очистки зависит от состава воды и концентрации загрязнений."
+              center
+            />
+
+            <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
+              <FadeIn>
+                <div className="rounded-3xl border border-slate-200 p-7">
+                  <div className="text-sm font-bold text-cyan-600">
+                    01
+                  </div>
+
+                  <h3 className="mt-4 text-xl font-bold text-[#0B2E59]">
+                    Анализ воды
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Определяем содержание железа и другие показатели,
+                    которые влияют на выбор технологии очистки.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.08}>
+                <div className="rounded-3xl border border-slate-200 p-7">
+                  <div className="text-sm font-bold text-cyan-600">
+                    02
+                  </div>
+
+                  <h3 className="mt-4 text-xl font-bold text-[#0B2E59]">
+                    Подбор оборудования
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Учитываем источник воды, расход, концентрацию
+                    загрязнений и особенности водоснабжения дома.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.16}>
+                <div className="rounded-3xl border border-slate-200 p-7">
+                  <div className="text-sm font-bold text-cyan-600">
+                    03
+                  </div>
+
+                  <h3 className="mt-4 text-xl font-bold text-[#0B2E59]">
+                    Монтаж и настройка
+                  </h3>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    После установки оборудование настраивается под
+                    параметры системы водоснабжения и режим эксплуатации.
+                  </p>
+                </div>
+              </FadeIn>
+            </div>
+          </Container>
+        </Section>
+
+        {/* Private house */}
+
+        <Section background="gray">
+          <Container>
+            <div className="mx-auto max-w-4xl">
+              <FadeIn>
+                <SectionTitle
+                  badge="Для частного дома"
+                  title="Обезжелезивание воды для дома и коттеджа"
+                  description="Система обезжелезивания может быть частью комплексной схемы водоподготовки."
+                  center
+                />
+
+                <div className="mt-10 rounded-3xl bg-white p-8 shadow-sm md:p-10">
+                  <p className="text-lg leading-8 text-slate-600">
+                    Если кроме железа в воде присутствует повышенная
+                    жёсткость, систему можно дополнить ступенью умягчения.
+                    Это позволяет решить несколько задач водоподготовки
+                    в рамках одной схемы.
+                  </p>
+
+                  <div className="mt-7">
+                    <Link
+                      href="/umyagchenie-vody/"
+                      className="inline-flex items-center gap-2 font-semibold text-cyan-600 transition hover:text-cyan-700"
+                    >
+                      Умягчение воды
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </Container>
+        </Section>
+
+        {/* Internal linking */}
+
+        <Section background="white">
+          <Container>
+            <FadeIn>
+              <div className="mx-auto max-w-3xl text-center">
+                <span className="text-sm font-bold uppercase tracking-widest text-cyan-600">
+                  Другие решения
+                </span>
+
+                <h2 className="mt-4 text-3xl font-black text-[#0B2E59] md:text-4xl">
+                  Комплексная водоочистка для дома
+                </h2>
+
+                <p className="mt-5 text-lg leading-8 text-slate-600">
+                  Если в воде одновременно присутствуют железо и соли
+                  жёсткости, может потребоваться комплексная система
+                  водоподготовки.
+                </p>
+
+                <Link
+                  href="/umyagchenie-vody/"
+                  className="mt-7 inline-flex items-center gap-2 font-semibold text-cyan-600 transition hover:text-cyan-700"
+                >
+                  Умягчение воды
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </FadeIn>
+          </Container>
+        </Section>
+
+        {/* FAQ */}
+
+        <Section background="gray">
+          <Container>
+            <SectionTitle
+              badge="FAQ"
+              title="Частые вопросы об обезжелезивании воды"
+              description="Основная информация о выборе и эксплуатации систем очистки воды от железа."
+              center
+            />
+
+            <div className="mx-auto mt-10 max-w-4xl space-y-4">
+              {faqItems.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-2xl border border-slate-200 bg-white p-6"
+                >
+                  <summary className="cursor-pointer list-none pr-8 text-lg font-semibold text-[#0B2E59]">
+                    {item.question}
+                  </summary>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        <CTA />
+      </main>
     </>
   );
 }
