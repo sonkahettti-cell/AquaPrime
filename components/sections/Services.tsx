@@ -43,7 +43,9 @@ export default function Services() {
             const href =
               service.title === "Умягчение воды"
                 ? "/umyagchenie-vody/"
-                : "#contacts";
+                : service.title === "Обезжелезивание воды"
+                  ? "/obezhelezivanie-vody/"
+                  : "#contacts";
 
             return (
               <FadeIn key={service.title} delay={index * 0.05}>
