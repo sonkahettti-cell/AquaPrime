@@ -18,8 +18,8 @@ import IconBox from "@/components/ui/IconBox";
 import { services } from "@/data/services";
 
 const icons = {
-  Droplets,
   FlaskConical,
+  Droplets,
   Filter,
   ShieldCheck,
   Waves,
@@ -28,70 +28,67 @@ const icons = {
 
 export default function Services() {
   return (
-    <Section id="services">
+    <Section id="services" background="gray">
       <Container>
+        <SectionTitle
+          badge="Услуги"
+          title="Водоочистка для дома и дачи"
+          description="Подбираем, устанавливаем и обслуживаем системы очистки воды для частных домов и коттеджей в Нижнем Новгороде и Нижегородской области."
+        />
 
-        <FadeIn>
-          <SectionTitle
-            badge="Наши услуги"
-            title="Подберём систему именно для вашей воды"
-            description="Проектируем, поставляем, устанавливаем и обслуживаем современные системы очистки воды для частных домов и коммерческих объектов."
-          />
-        </FadeIn>
-
-        <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
-            const Icon =
-              icons[service.icon as keyof typeof icons];
+            const Icon = icons[service.icon as keyof typeof icons];
+
+            const href =
+              service.title === "Умягчение воды"
+                ? "/umyagchenie-vody/"
+                : "#contacts";
 
             return (
-              <FadeIn
-                key={service.title}
-                delay={index * 0.08}
-              >
-                <a
-                  href="#contacts"
-                  className="block"
-                >
-                  <Card className="cursor-pointer">
+              <FadeIn key={service.title} delay={index * 0.05}>
+                <Card className="group flex h-full flex-col">
+                  <IconBox>
+                    <Icon className="h-6 w-6" />
+                  </IconBox>
 
-                    <IconBox>
-                      <Icon
-                        size={30}
-                        className="text-cyan-600 transition-colors duration-300 group-hover:text-white"
-                      />
-                    </IconBox>
+                  <h3 className="mt-6 text-xl font-semibold text-slate-900">
+                    {service.title}
+                  </h3>
 
-                    <h3 className="mt-8 text-2xl font-bold text-[#0B2E59]">
-                      {service.title}
-                    </h3>
+                  <p className="mt-3 flex-1 text-base leading-7 text-slate-600">
+                    {service.description}
+                  </p>
 
-                    <p className="mt-5 leading-8 text-slate-600">
-                      {service.description}
-                    </p>
-
-                    <p className="mt-4 text-sm text-slate-400">
-                      Нажмите, чтобы получить консультацию
-                    </p>
-
-                    <div className="mt-8 inline-flex items-center gap-2 font-semibold text-cyan-600 transition-all duration-300 group-hover:gap-4 group-hover:text-cyan-700">
-                      Подобрать решение
-
-                      <ArrowRight
-                        size={18}
-                        strokeWidth={2.2}
-                      />
-                    </div>
-
-                  </Card>
-                </a>
+                  <a
+                    href={href}
+                    aria-label={`Подробнее: ${service.title}`}
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sky-600 transition-colors group-hover:text-sky-700"
+                  >
+                    Подробнее
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </Card>
               </FadeIn>
             );
           })}
-
         </div>
 
+        <FadeIn delay={0.2}>
+          <div className="mt-12 text-center">
+            <p className="text-base text-slate-600">
+              Не знаете, какая система подойдёт именно для вашей воды?
+            </p>
+
+            <a
+              href="#contacts"
+              className="mt-4 inline-flex items-center gap-2 font-semibold text-sky-600 transition-colors hover:text-sky-700"
+            >
+              Поможем подобрать подходящее решение
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </FadeIn>
       </Container>
     </Section>
   );
