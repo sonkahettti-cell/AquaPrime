@@ -8,7 +8,5 @@ export default function robots(): MetadataRoute.Robots {
     },
 
     sitemap: "https://aqprime.ru/sitemap.xml",
-
-    host: "https://aqprime.ru",
   };
 }

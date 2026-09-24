@@ -1,36 +1,118 @@
+import { contacts } from "@/data/contacts";
+
 export default function JsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
 
-    name: "AquaPrime",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://aqprime.ru/#business",
 
-    url: "https://aqprime.ru",
+        name: "AquaPrime",
 
-    logo: "https://aqprime.ru/logo/logo_header.png",
+        url: contacts.website,
 
-    image: "https://aqprime.ru/opengraph-image.png",
+        logo: "https://aqprime.ru/logo/logo_header.png",
 
-    telephone: "+79334230201",
+        image: "https://aqprime.ru/og-image.jpg",
 
-    email: "info@aqprime.ru",
+        telephone: contacts.phone,
 
-    address: {
-      "@type": "PostalAddress",
-      addressRegion: "Нижегородская область",
-      addressCountry: "RU",
-    },
+        email: contacts.email,
 
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: "Нижегородская область",
-    },
+        description:
+          "Водоочистка в Нижнем Новгороде и Нижегородской области. Подбор, монтаж и обслуживание систем очистки воды для частных домов и коттеджей.",
 
-    description:
-      "Проектирование, монтаж и обслуживание систем очистки воды для частных домов, коттеджей и коммерческих объектов.",
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: "Нижегородская область",
+          addressCountry: "RU",
+        },
 
-    sameAs: [
-      "https://wa.me/79334230201"
+        areaServed: {
+          "@type": "AdministrativeArea",
+          name: "Нижегородская область",
+        },
+
+        knowsAbout: [
+          "Водоочистка",
+          "Очистка воды",
+          "Умягчение воды",
+          "Обезжелезивание воды",
+          "Обратный осмос",
+          "Водоподготовка",
+          "Монтаж систем очистки воды",
+          "Обслуживание систем водоочистки",
+        ],
+
+        sameAs: [
+          contacts.whatsapp,
+          contacts.telegram,
+        ],
+
+        availableLanguage: ["ru"],
+
+        priceRange: "$$",
+      },
+
+      {
+        "@type": "WebSite",
+        "@id": "https://aqprime.ru/#website",
+
+        url: "https://aqprime.ru/",
+
+        name: "AquaPrime",
+
+        description:
+          "Водоочистка в Нижнем Новгороде и Нижегородской области.",
+
+        inLanguage: "ru-RU",
+
+        publisher: {
+          "@id": "https://aqprime.ru/#business",
+        },
+      },
+
+      {
+        "@type": "ItemList",
+        "@id": "https://aqprime.ru/#services",
+
+        name: "Услуги AquaPrime по водоочистке",
+
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Анализ воды",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Водоочистка для дома",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Обезжелезивание воды",
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: "Умягчение воды",
+          },
+          {
+            "@type": "ListItem",
+            position: 5,
+            name: "Обратный осмос",
+          },
+          {
+            "@type": "ListItem",
+            position: 6,
+            name: "Сервисное обслуживание",
+          },
+        ],
+      },
     ],
   };
 

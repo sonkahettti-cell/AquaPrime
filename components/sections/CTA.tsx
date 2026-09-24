@@ -51,9 +51,7 @@ export default function CTA() {
     };
 
     try {
-      const response = await fetch(
-  "https://aquaprime-telegram.sonkahettti.workers.dev/",
-  {
+      const response = await fetch("https://api.aqprime.ru", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
